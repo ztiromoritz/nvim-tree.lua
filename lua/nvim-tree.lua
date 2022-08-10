@@ -21,7 +21,7 @@ local M = {
   setup_called = false,
   init_root = "",
 }
-
+print "telescope"
 function M.focus()
   M.open()
   view.focus()
