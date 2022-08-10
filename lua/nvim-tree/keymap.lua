@@ -236,11 +236,11 @@ local DEFAULT_KEYMAPS = {
 }
 
 function M.set_keymaps(bufnr)
-  local opts = { noremap = true, silent = true, nowait = true, buffer = bufnr }
   for _, km in ipairs(M.keymaps) do
     local keys = type(km.key) == "table" and km.key or { km.key }
+    local opts = { noremap = true, silent = true, nowait = true, callback = km.callback, desc = km.desc }
     for _, key in ipairs(keys) do
-      vim.keymap.set("n", key, km.callback, opts)
+      vim.api.nvim_buf_set_keymap(bufnr, "n", key, "", opts)
     end
   end
 end
